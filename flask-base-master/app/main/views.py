@@ -20,3 +20,7 @@ def about():
 @main.route('/matches')
 def matches():
 	return render_template('main/matches.html')
+
+@main.route('/results')
+def search():
+    return render_template('main/results.html')
