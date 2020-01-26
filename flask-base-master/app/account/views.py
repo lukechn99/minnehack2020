@@ -29,6 +29,8 @@ from app.email import send_email
 from app.models import User
 from app.models import Courses
 
+from app.match_maker import clean_str
+
 account = Blueprint('account', __name__)
 
 
@@ -280,7 +282,7 @@ def add_course():
     if form.add_course.data:
         courses = Courses(
         user_id = current_user.id,
-        course_name = str(form.courses.data[-1]))#gettext()))
+        course_name = clean_str(str(form.courses.data[-1])))#gettext()))
         db.session.add(courses)
         db.session.commit()
         form.courses.append_entry()

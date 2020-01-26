@@ -342,6 +342,7 @@ def clean(course):
         SUBJECT = course[:n]
     else:
         print('Subject Not Found')
+        raise ValueError()
         return False
     
 #Checks for 4 digit class code    
@@ -349,9 +350,19 @@ def clean(course):
         CODE = course[n:]
     else:
         print('Number Not Found')
+        raise ValueError()
         return False
     
     return Course(SUBJECT,CODE)
+	
+def clean_str(course):
+    try:
+        c = clean(course).__str__()
+    except ValueError:
+        c = "INVALID"
+    finally:
+        return c
+		
 
 #Class for request space
 class SearchSpace:
