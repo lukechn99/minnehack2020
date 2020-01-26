@@ -5,6 +5,7 @@ from itsdangerous import BadSignature, SignatureExpired
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from .. import db, login_manager
+from db_setup import db_session
 
 
 class Permission:
@@ -73,7 +74,7 @@ class User(UserMixin, db.Model):
 
     def is_admin(self):
         return self.can(Permission.ADMINISTER)
-		
+
 	# def get_id(self):
 		# return self.id
 
@@ -182,13 +183,13 @@ class User(UserMixin, db.Model):
     def __repr__(self):
         return '<User \'%s\'>' % self.full_name()
 
-		
+
 class Courses(db.Model):
     __tablename__ = 'courses'
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     course_name = db.Column(db.String(64), unique=False, index=True)
-	
+
 class Groups(db.Model):
     __tablename__='groups'
     id = db.Column(db.Integer, primary_key=True)

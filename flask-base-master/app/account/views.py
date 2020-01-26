@@ -23,13 +23,9 @@ from app.account.forms import (
     RegistrationForm,
     RequestResetPasswordForm,
     ResetPasswordForm,
-	AddCourseForm
 )
 from app.email import send_email
 from app.models import User
-from app.models import Courses
-
-from app.match_maker import clean_str
 
 account = Blueprint('account', __name__)
 
@@ -64,15 +60,15 @@ def register():
         db.session.commit()
         token = user.generate_confirmation_token()
         confirm_link = url_for('account.confirm', token=token, _external=True)
-        # get_queue().enqueue(
-            # send_email,
-            # recipient=user.email,
-            # subject='Confirm Your Account',
-            # template='account/email/confirm',
-            # user=user,
-            # confirm_link=confirm_link)
-        # flash('A confirmation link has been sent to {}.'.format(user.email),
-              # 'warning')
+        get_queue().enqueue(
+            send_email,
+            recipient=user.email,
+            subject='Confirm Your Account',
+            template='account/email/confirm',
+            user=user,
+            confirm_link=confirm_link)
+        flash('A confirmation link has been sent to {}.'.format(user.email),
+              'warning')
         return redirect(url_for('main.index'))
     return render_template('account/register.html', form=form)
 
@@ -274,23 +270,7 @@ def join_from_invite(user_id, token):
             template='account/email/invite',
             user=new_user,
             invite_link=invite_link)
-    return redirect(url_for('main.index'))
-
-@account.route('/add-courses', methods=['GET','POST'])
-def add_course():
-    form = AddCourseForm()
-    if form.add_course.data:
-        courses = Courses(
-        user_id = current_user.id,
-        course_name = clean_str(str(form.courses.data[-1])))#gettext()))
-        db.session.add(courses)
-        db.session.commit()
-        form.courses.append_entry()
-    return render_template('account/addcourses.html', form=form)
-        #return redirect(url_for('main.index'))
-
-		#return redirect('/add-courses')
-
+     return redirect(url_for('main.index'))
 
 
 @account.before_app_request
