@@ -34,9 +34,7 @@ class RegistrationForm(FlaskForm):
         'Email', validators=[InputRequired(),
                              Length(1, 64),
                              Email()])
-    domain = email.split("@")
-    if domain[1] != "umn.edu":
-        raise ValidationError('Email does not belong to the University of Minnesota')
+    
     password = PasswordField(
         'Password',
         validators=[
@@ -47,6 +45,9 @@ class RegistrationForm(FlaskForm):
     submit = SubmitField('Register')
 
     def validate_email(self, field):
+        domain = email.split("@")
+        if domain[1] != "umn.edu":
+            raise ValidationError('Email does not belong to the University of Minnesota')
         if User.query.filter_by(email=field.data).first():
             raise ValidationError('Email already registered. (Did you mean to '
                                   '<a href="{}">log in</a> instead?)'.format(
