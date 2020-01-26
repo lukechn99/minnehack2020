@@ -6,4 +6,12 @@ Students will be able to create a login and find their classes from a list of al
 __FEATURES TO IMPLEMENT__  
 * login  
 * student profile
-* 
+* front-end
+* database?
+* matchmaking based on course query
+  
+__DEVELOPER ROLES__
+* Brandon
+* Jeffery
+* Luke
+* William
