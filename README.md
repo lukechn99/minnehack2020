@@ -9,6 +9,8 @@ __FEATURES TO IMPLEMENT__
 * front-end
 * database?
 * matchmaking based on course query
+* posts
+how to?
   
 __DEVELOPER ROLES__
 * Brandon (
