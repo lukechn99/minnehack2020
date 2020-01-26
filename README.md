@@ -9,7 +9,7 @@ __FEATURES TO IMPLEMENT__
 * front-end
 * database?
 * matchmaking based on course query
-* posts
+* posts  
 how to?
   
 __DEVELOPER ROLES__
