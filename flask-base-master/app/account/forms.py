@@ -111,10 +111,12 @@ class ChangePasswordForm(FlaskForm):
     new_password2 = PasswordField(
         'Confirm new password', validators=[InputRequired()])
     submit = SubmitField('Update password')
+	
+	
 class AddCourseForm(FlaskForm):
     courses = FieldList(StringField('Course Name',validators=[InputRequired()],render_kw={"placeholder":"CSCI 4707"}),label="Add Courses",validators=None,min_entries=1)
     add_course = SubmitField(label='Add Course')
-    submit_courses = SubmitField(label='Submit Courses')
+    #submit_courses = SubmitField(label='Submit Courses')
 
 class ChangeEmailForm(FlaskForm):
     email = EmailField(

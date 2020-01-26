@@ -10,11 +10,7 @@ from .. import db, login_manager
 class Permission:
     GENERAL = 0x01
     ADMINISTER = 0xff
-class Courses(db.Model):
-    __tablename__ = 'courses'
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    course_name = db.Column(db.String(64), unique=False, index=True)
+
 
 class Role(db.Model):
     __tablename__ = 'roles'
@@ -77,6 +73,9 @@ class User(UserMixin, db.Model):
 
     def is_admin(self):
         return self.can(Permission.ADMINISTER)
+		
+	# def get_id(self):
+		# return self.id
 
     @property
     def password(self):
@@ -183,6 +182,12 @@ class User(UserMixin, db.Model):
     def __repr__(self):
         return '<User \'%s\'>' % self.full_name()
 
+		
+class Courses(db.Model):
+    __tablename__ = 'courses'
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    course_name = db.Column(db.String(64), unique=False, index=True)
 
 class AnonymousUser(AnonymousUserMixin):
     def can(self, _):

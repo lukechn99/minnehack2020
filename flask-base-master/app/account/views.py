@@ -23,6 +23,7 @@ from app.account.forms import (
     RegistrationForm,
     RequestResetPasswordForm,
     ResetPasswordForm,
+	AddCourseForm
 )
 from app.email import send_email
 from app.models import User
@@ -51,15 +52,7 @@ def login():
 def register():
     """Register a new user, and send them a confirmation email."""
     form = RegistrationForm()
-    # if form.add_course.data:
-    #     coursesCourses(course_name =form.courses.gettext)
-    #     form.courses.append_entry()
-    #     courses.append()
-    #     db.session.add(courses)
-    #     db.session.commit()
-    #     return render_template('account/register.html', form=form)
     if form.validate_on_submit():
-
         user = User(
             first_name=form.first_name.data,
             last_name=form.last_name.data,
@@ -70,14 +63,14 @@ def register():
         token = user.generate_confirmation_token()
         confirm_link = url_for('account.confirm', token=token, _external=True)
         # get_queue().enqueue(
-        #     send_email,
-        #     recipient=user.email,
-        #     subject='Confirm Your Account',
-        #     template='account/email/confirm',
-        #     user=user,
-        #     confirm_link=confirm_link)
-        #flash('A confirmation link has been sent to {}.'.format(user.email),
-        #      'warning')
+            # send_email,
+            # recipient=user.email,
+            # subject='Confirm Your Account',
+            # template='account/email/confirm',
+            # user=user,
+            # confirm_link=confirm_link)
+        # flash('A confirmation link has been sent to {}.'.format(user.email),
+              # 'warning')
         return redirect(url_for('main.index'))
     return render_template('account/register.html', form=form)
 
@@ -286,28 +279,33 @@ def add_course():
     form = AddCourseForm()
     if form.add_course.data:
         courses = Courses(
-        user_id = User.query.get(int(user_id)),
-        course_name =form.courses.gettext)
+        user_id = current_user.id,
+        course_name = str(form.courses.data[-1]))#gettext()))
         db.session.add(courses)
         db.session.commit()
         form.courses.append_entry()
-        return render_template('account/addcourses.html', form=form)
+    return render_template('account/addcourses.html', form=form)
+        #return redirect(url_for('main.index'))
+
+		#return redirect('/add-courses')
 
 
 
 @account.before_app_request
 def before_request():
     """Force user to confirm email before accessing login-required routes."""
-    if current_user.is_authenticated \
-            and not current_user.confirmed \
-            and request.endpoint[:8] != 'account.' \
-            and request.endpoint != 'static':
-        return redirect(url_for('account.unconfirmed'))
+    return
+    # if current_user.is_authenticated \
+            # and not current_user.confirmed \
+            # and request.endpoint[:8] != 'account.' \
+            # and request.endpoint != 'static':
+        # return redirect(url_for('account.unconfirmed'))
 
 
 @account.route('/unconfirmed')
 def unconfirmed():
     """Catch users with unconfirmed emails."""
-    if current_user.is_anonymous or current_user.confirmed:
-        return redirect(url_for('main.index'))
-    return render_template('account/unconfirmed.html')
+    return
+    # if current_user.is_anonymous or current_user.confirmed:
+        # return redirect(url_for('main.index'))
+    # return render_template('account/unconfirmed.html')
