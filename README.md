@@ -11,7 +11,7 @@ __FEATURES TO IMPLEMENT__
 * matchmaking based on course query
   
 __DEVELOPER ROLES__
-* Brandon
-* Jeffery
-* Luke
-* William
+* Brandon (
+* Jeffery (query cleaning)
+* Luke (
+* William (
