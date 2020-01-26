@@ -17,9 +17,9 @@ Possible friend system
 
   
 __DEVELOPER ROLES__
-* Brandon (
+* Brandon (adding class, registration, database)
 * Jeffery (query cleaning, matchmaking 
-* Luke (Jinja eng., Matchmaking page
-* William (
+* Luke (Jinja eng., matchmaking page
+* William (database structure)
   
 boilerplate credits: hack4impact @ https://github.com/hack4impact/flask-base
