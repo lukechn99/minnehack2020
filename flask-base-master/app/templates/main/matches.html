@@ -27,10 +27,12 @@
                 Admin Dashboard
             </h2>
             <div class="ui two column stackable grid">
-                {{ dashboard_option('Search Study Groups', 'admin.registered_users',
-                                    description='View the groups that others have made', icon='users icon') }}
-                {{ dashboard_option('Make a new group', 'admin.new_user',
-                                    description='Make a group based on your courses', icon='add user icon') }}
+                {{ dashboard_option('Search Courses', 'main.search',
+                                    description='Search for others who want to work on the same courses!', icon='users icon') }}
+                {#{{ dashboard_option('Search Study Groups', 'main.search',
+                                    description='View the groups that others have made', icon='users icon') }}#}
+                {#{{ dashboard_option('Make a new group', 'main.make',
+                                    description='Make a group based on your courses', icon='add user icon') }}#}
             </div>
         </div>
     </div>
