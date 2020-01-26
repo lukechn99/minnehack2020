@@ -21,3 +21,5 @@ __DEVELOPER ROLES__
 * Jeffery (query cleaning)
 * Luke (
 * William (
+  
+boilerplate credits: hack4impact @ https://github.com/hack4impact/flask-base
