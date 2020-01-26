@@ -26,6 +26,7 @@ from app.account.forms import (
 )
 from app.email import send_email
 from app.models import User
+from app.models import Courses
 
 account = Blueprint('account', __name__)
 
@@ -50,7 +51,12 @@ def login():
 def register():
     """Register a new user, and send them a confirmation email."""
     form = RegistrationForm()
+    if form.add_course.data:
+        form.courses.append_entry()
+        courses = Courses(course_name =form.courses.gettext)
+        return render_template('account/register.html', form=form)
     if form.validate_on_submit():
+
         user = User(
             first_name=form.first_name.data,
             last_name=form.last_name.data,
@@ -60,15 +66,15 @@ def register():
         db.session.commit()
         token = user.generate_confirmation_token()
         confirm_link = url_for('account.confirm', token=token, _external=True)
-        get_queue().enqueue(
-            send_email,
-            recipient=user.email,
-            subject='Confirm Your Account',
-            template='account/email/confirm',
-            user=user,
-            confirm_link=confirm_link)
-        flash('A confirmation link has been sent to {}.'.format(user.email),
-              'warning')
+        # get_queue().enqueue(
+        #     send_email,
+        #     recipient=user.email,
+        #     subject='Confirm Your Account',
+        #     template='account/email/confirm',
+        #     user=user,
+        #     confirm_link=confirm_link)
+        #flash('A confirmation link has been sent to {}.'.format(user.email),
+        #      'warning')
         return redirect(url_for('main.index'))
     return render_template('account/register.html', form=form)
 

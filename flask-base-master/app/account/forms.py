@@ -6,6 +6,7 @@ from wtforms.fields import (
     PasswordField,
     StringField,
     SubmitField,
+    FieldList
 )
 from wtforms.fields.html5 import EmailField
 from wtforms.validators import Email, EqualTo, InputRequired, Length
@@ -34,6 +35,7 @@ class RegistrationForm(FlaskForm):
         'Email', validators=[InputRequired(),
                              Length(1, 64),
                              Email()])
+
     password = PasswordField(
         'Password',
         validators=[
@@ -41,9 +43,14 @@ class RegistrationForm(FlaskForm):
             EqualTo('password2', 'Passwords must match')
         ])
     password2 = PasswordField('Confirm password', validators=[InputRequired()])
+    courses = FieldList(StringField('Course Name',validators=[InputRequired()],render_kw={"placeholder":"CSCI 4707"}),label="Add Courses",validators=[InputRequired()],min_entries=1)
+    add_course = SubmitField(label='Add Course')
     submit = SubmitField('Register')
 
     def validate_email(self, field):
+        domain = field.data.split("@")
+        if domain[1] != "umn.edu":
+            raise ValidationError('Email does not belong to the University of Minnesota')
         if User.query.filter_by(email=field.data).first():
             raise ValidationError('Email already registered. (Did you mean to '
                                   '<a href="{}">log in</a> instead?)'.format(
