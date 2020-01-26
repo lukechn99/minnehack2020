@@ -7,14 +7,14 @@ __FEATURES TO IMPLEMENT__
 * login  
 * student profile
 * front-end
-* database?
+* database
 * matchmaking based on course query
 * posts  
 Once the user submits a query for a class, they will be given a list of matches  
 The user has the opportunity to message matches to arrange a study session  
 Once the study session is over, the request will be deactivated  
 Possible friend system  
-  
+* search box    
   
 __DEVELOPER ROLES__  
 * Brandon (adding class, registration, database, forms)  
