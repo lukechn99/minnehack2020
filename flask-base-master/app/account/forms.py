@@ -34,6 +34,9 @@ class RegistrationForm(FlaskForm):
         'Email', validators=[InputRequired(),
                              Length(1, 64),
                              Email()])
+    domain = email.split("@")
+    if domain[1] != "umn.edu":
+        raise ValidationError('Email does not belong to the University of Minnesota')
     password = PasswordField(
         'Password',
         validators=[
