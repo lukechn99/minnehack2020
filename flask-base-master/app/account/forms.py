@@ -45,7 +45,7 @@ class RegistrationForm(FlaskForm):
     submit = SubmitField('Register')
 
     def validate_email(self, field):
-        domain = email.split("@")
+        domain = field.data.split("@")
         if domain[1] != "umn.edu":
             raise ValidationError('Email does not belong to the University of Minnesota')
         if User.query.filter_by(email=field.data).first():
