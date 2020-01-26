@@ -23,7 +23,6 @@
     {% set endpoints = [
       ('main.index', config.APP_NAME, 'home'),
       ('main.about', 'About', 'info'),
-      ('main.matches', 'Matches', 'matches')
     ]%}
     {% set user = [] %}
     {% if current_user.is_authenticated %}
