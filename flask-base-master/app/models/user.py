@@ -188,6 +188,19 @@ class Courses(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     course_name = db.Column(db.String(64), unique=False, index=True)
+	
+class Groups(db.Model):
+    __tablename__='groups'
+    id = db.Column(db.Integer, primary_key=True)
+    group_name = db.Column(db.String(64), unique=False, index=True)
+    course = db.Column(db.String(64), unique=False, index=True)
+
+class Group_Membership(db.Model):
+    __tablename__ = 'group_membership'
+    id = db.Column(db.Integer, primary_key=True)
+    group_id = db.Column(db.Integer, db.ForeignKey('groups.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+
 
 class AnonymousUser(AnonymousUserMixin):
     def can(self, _):

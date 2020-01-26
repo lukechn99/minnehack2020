@@ -4,7 +4,7 @@ webassets-external/
 *.pyc
 *.pyo
 env
-*.env
+venv*
 env*
 dist
 *.egg

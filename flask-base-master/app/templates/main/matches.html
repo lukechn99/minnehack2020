@@ -1,0 +1,39 @@
+{% extends 'layouts/base.html' %}
+
+{% macro dashboard_option(title, endpoint, description=None, icon=None) %}
+    <a class="column" href="{{ url_for(endpoint) }}">
+        <div class="ui padded segment">
+            <h3 class="ui header">
+                {% if icon is not none %}
+                    <i class="{{ icon }}"></i>
+                {% endif %}
+                <div class="content">
+                    {{ title }}
+                    {% if description is not none %}
+                        <div class="sub header">
+                            {{ description }}
+                        </div>
+                    {% endif %}
+                </div>
+            </h3>
+        </div>
+    </a>
+{% endmacro %}
+
+{% block content %}
+    <div class="ui stackable centered grid container">
+        <div class="twelve wide column">
+            <h2 class="ui header">
+                Admin Dashboard
+            </h2>
+            <div class="ui two column stackable grid">
+                {{ dashboard_option('Search Courses', 'main.search',
+                                    description='Search for others who want to work on the same courses!', icon='users icon') }}
+                {#{{ dashboard_option('Search Study Groups', 'main.search',
+                                    description='View the groups that others have made', icon='users icon') }}#}
+                {#{{ dashboard_option('Make a new group', 'main.make',
+                                    description='Make a group based on your courses', icon='add user icon') }}#}
+            </div>
+        </div>
+    </div>
+{% endblock %}
