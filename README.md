@@ -18,8 +18,8 @@ Possible friend system
   
 __DEVELOPER ROLES__
 * Brandon (
-* Jeffery (query cleaning)
-* Luke (
+* Jeffery (query cleaning, matchmaking 
+* Luke (Jinja eng., Matchmaking page
 * William (
   
 boilerplate credits: hack4impact @ https://github.com/hack4impact/flask-base
