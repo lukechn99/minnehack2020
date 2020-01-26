@@ -14,12 +14,12 @@ Once the user submits a query for a class, they will be given a list of matches
 The user has the opportunity to message matches to arrange a study session  
 Once the study session is over, the request will be deactivated  
 Possible friend system  
-
   
-__DEVELOPER ROLES__
-* Brandon (adding class, registration, database)
-* Jeffery (query cleaning, matchmaking 
-* Luke (Jinja eng., matchmaking page
-* William (database structure)
   
-boilerplate credits: hack4impact @ https://github.com/hack4impact/flask-base
+__DEVELOPER ROLES__  
+* Brandon (adding class, registration, database, forms)  
+* Jeffery (query cleaning, matchmaking, functions)  
+* Luke (Jinja eng., matchmaking page, search function)  
+* William (database structure, forms, database tables)  
+  
+boilerplate credits: hack4impact @ https://github.com/hack4impact/flask-base  
