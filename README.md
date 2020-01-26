@@ -10,7 +10,11 @@ __FEATURES TO IMPLEMENT__
 * database?
 * matchmaking based on course query
 * posts  
-how to?
+Once the user submits a query for a class, they will be given a list of matches  
+The user has the opportunity to message matches to arrange a study session  
+Once the study session is over, the request will be deactivated  
+Possible friend system  
+
   
 __DEVELOPER ROLES__
 * Brandon (
