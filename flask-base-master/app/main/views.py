@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template
-
+from app import db
 from app.models import EditableHTML
 
 main = Blueprint('main', __name__)
@@ -23,4 +23,36 @@ def matches():
 
 @main.route('/results')
 def search():
+    # given a class, searches for all students that also have that class
+    
+SQL :
+SELECT * FROM census 
+WHERE sex = F
+SQLAlchemy :
+db.select([census]).where(census.columns.sex == 'F')
+
+SQL :
+SELECT state, sex
+FROM census
+WHERE state IN (Texas, New York)
+SQLAlchemy :
+db.select([census.columns.state, census.columns.sex]).where(census.columns.state.in_(['Texas', 'New York']))
+
+# SELECT user_id
+# FROM courses
+# WHERE courses.course_name == query
+    queryCourse = []
+    users = User.query.all()
+    courses = Courses.query.all()
+    # result = Courses.query.filter_by(Courses.course_name = query).all()
+    result = db.select([courses.columns.user_id]).where(courses.columns.course_name == query)
+    # result = ["id", "id"]
+# SELECT email, name 
+# FROM users
+# WHERE user_id == id
+    # course_name
+    # user_id
+    output = db.select([users.columns.email, users.columns.first_name, users.columns.last_name]).where(
+        user.column.id in result)
+    
     return render_template('main/results.html')

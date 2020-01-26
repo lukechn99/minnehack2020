@@ -11,6 +11,13 @@ class Permission:
     GENERAL = 0x01
     ADMINISTER = 0xff
 
+class Courses(db.Model):
+    __tablename__ = 'courses'
+    id = db.Column(db.Integer)
+    courses = db.Column(db.String(64))
+    
+    def __repr__(self):
+        return '<ID \'%s\'>' % self.id
 
 class Role(db.Model):
     __tablename__ = 'roles'
