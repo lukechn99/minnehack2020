@@ -27,10 +27,7 @@
                 {{ f.render_form_field(form.password) }}
                 {{ f.render_form_field(form.password2) }}
             </div>
-            <div class="table field">
-                {{f.render_form_field(form.courses)}}
-                
-            </div>
+            
             {{ f.form_message(flashes['error'], header='Something went wrong.', class='error') }}
             {{ f.form_message(flashes['warning'], header='Check your email.', class='warning') }}
             {{ f.form_message(flashes['info'], header='Information', class='info') }}

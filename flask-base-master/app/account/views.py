@@ -51,10 +51,13 @@ def login():
 def register():
     """Register a new user, and send them a confirmation email."""
     form = RegistrationForm()
-    if form.add_course.data:
-        form.courses.append_entry()
-        courses = Courses(course_name =form.courses.gettext)
-        return render_template('account/register.html', form=form)
+    # if form.add_course.data:
+    #     coursesCourses(course_name =form.courses.gettext)
+    #     form.courses.append_entry()
+    #     courses.append()
+    #     db.session.add(courses)
+    #     db.session.commit()
+    #     return render_template('account/register.html', form=form)
     if form.validate_on_submit():
 
         user = User(
@@ -277,6 +280,19 @@ def join_from_invite(user_id, token):
             user=new_user,
             invite_link=invite_link)
     return redirect(url_for('main.index'))
+
+@account.route('/add-courses', methods=['GET','POST'])
+def add_course():
+    form = AddCourseForm()
+    if form.add_course.data:
+        courses = Courses(
+        user_id = User.query.get(int(user_id)),
+        course_name =form.courses.gettext)
+        db.session.add(courses)
+        db.session.commit()
+        form.courses.append_entry()
+        return render_template('account/addcourses.html', form=form)
+
 
 
 @account.before_app_request
