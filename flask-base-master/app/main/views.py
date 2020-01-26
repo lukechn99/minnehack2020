@@ -25,7 +25,9 @@ from app.models import Courses
 
 main = Blueprint('main', __name__)
 
+# from db_setup import db_session, init_db
 
+# init_db()
 @main.route('/')
 def index():
     return render_template('main/index.html')
@@ -45,13 +47,18 @@ def matches():
 @main.route('/search', methods=['GET', 'POST'])
 def search():
     form = SearchForm()
-    if request.method == 'POST' and form.validate_on_submit():
-        user_ids = Courses.query.filter_by(course_name=form.search.data)
-        user_ids = [x.__dict__.get('user_id') for x in user_ids]
-        users = []
+    users = []
+    user_ids = []
+    
+    if form.validate_on_submit():
+        user_ids = Courses.query.filter(Courses.course_name == form.search.data).all()
+        user_ids = [id.user_id for id in user_ids]
         for u in user_ids:
-            users.append(User.query.filter_by(id=u))
-    return render_template('main/search.html', form=form, users=users)
+            users += (User.query.filter(User.id==u).all())
+    elif form.search.data == '':
+        qry = db_session.query(Courses)
+        results = qry.all()
+    return render_template('main/search.html', form=form, users=users, search_data=form.search.data)
     
 # SQL :
 # SELECT * FROM census 

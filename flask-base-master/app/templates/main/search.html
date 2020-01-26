@@ -2,13 +2,14 @@
 {% import 'macros/form_macros.html' as f %}
 
 {% block content %}
-    <div class="ui grid container">
         <div class="eight wide computer sixteen wide mobile centered column">
             <h2 class="ui dividing header">Search for classmates</h2>
             {{ f.render_form(form) }}
-        </div>
-    </div>
-     <div style="overflow-x: scroll;">
+            <p>{{search_data}}</p>
+            {% for uid in user_ids %}
+            <p>{{uid}}</p>
+            {% endfor %}
+
                 <table class="ui searchable sortable unstackable selectable celled table">
                     <thead>
                         <tr>
